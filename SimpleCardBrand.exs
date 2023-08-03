@@ -4,7 +4,7 @@ defmodule SimpleCardBrand.Guards do
   """
 
   @doc """
-  True if the PAN length is in the minimum to maximum allowed length.
+  True if the PAN length is in the minimum to maximum allowed length (inclusive).
 
   Returns true
 
