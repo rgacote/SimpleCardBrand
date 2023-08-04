@@ -27,6 +27,7 @@ defmodule SimpleCardBrand do
   - Diners Club International (:dinersclubinternational)
   - Discover (:discover)
   - JCB: (:jcb)
+  - Maestro UK (:maestrouk)
   - Mastercard (:mastercard)
   - Visa (:visa)
   - Visa Electron (:visaelectron)
@@ -164,6 +165,15 @@ defmodule SimpleCardBrand do
     {:ok, :chinaunionpay}
   end
 
+  # Maestro UK
+  defp _card_brand(["6", "7", "5", "9" | _], pan_length) when pan_range(pan_length, 12, 19) do
+    {:ok, :maestrouk}
+  end
+
+  # Maestro UK
+  defp _card_brand(["6", "7", "6", "7", "7", sixth | _], pan_length) when sixth in ["0", "4"] and pan_range(pan_length, 12, 19) do
+    {:ok, :maestrouk}
+  end
 
   defp _card_brand(_, _) do
     {:error}
@@ -186,3 +196,6 @@ SimpleCardBrand.card_brand("3527", 19) # Error
 SimpleCardBrand.card_brand("3528345", 19) # JCB
 SimpleCardBrand.card_brand("36312", 14) # Diners Club International
 SimpleCardBrand.card_brand("545454", 16) # Diners Club International
+SimpleCardBrand.card_brand("676771", 16) # Error
+SimpleCardBrand.card_brand("67593", 12) # Maestro UK
+SimpleCardBrand.card_brand("676770", 14) # Maestro UK
