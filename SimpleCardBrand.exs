@@ -27,6 +27,7 @@ defmodule SimpleCardBrand do
   - Diners Club International (:dinersclubinternational)
   - Discover (:discover)
   - JCB: (:jcb)
+  - Maestro (:maestro)
   - Maestro UK (:maestrouk)
   - Mastercard (:mastercard)
   - Visa (:visa)
@@ -165,6 +166,41 @@ defmodule SimpleCardBrand do
     {:ok, :chinaunionpay}
   end
 
+  # Maestro
+  defp _card_brand(["5", "0", "1", "8" | _], pan_length) when pan_range(pan_length, 12, 19) do
+    {:ok, :maestro}
+  end
+
+  # Maestro
+  defp _card_brand(["5", "0", "2", "0" | _], pan_length) when pan_range(pan_length, 12, 19) do
+    {:ok, :maestro}
+  end
+
+  # Maestro
+  defp _card_brand(["5", "0", "3", "8" | _], pan_length) when pan_range(pan_length, 12, 19) do
+    {:ok, :maestro}
+  end
+
+  # Maestro
+  defp _card_brand(["5", "8", "9", "3" | _], pan_length) when pan_range(pan_length, 12, 19) do
+    {:ok, :maestro}
+  end
+
+  # Maestro
+  defp _card_brand(["6", "3", "0", "4" | _], pan_length) when pan_range(pan_length, 12, 19) do
+    {:ok, :maestro}
+  end
+
+  # Maestro
+  defp _card_brand(["6", "7", "5", "9" | _], pan_length) when pan_range(pan_length, 12, 19) do
+    {:ok, :maestro}
+  end
+
+  # Maestro
+  defp _card_brand(["6", "7", "6", fourth | _], pan_length) when fourth in ["1", "2", "3"] and pan_range(pan_length, 12, 19) do
+    {:ok, :maestro}
+  end
+
   # Maestro UK
   defp _card_brand(["6", "7", "5", "9" | _], pan_length) when pan_range(pan_length, 12, 19) do
     {:ok, :maestrouk}
@@ -175,6 +211,7 @@ defmodule SimpleCardBrand do
     {:ok, :maestrouk}
   end
 
+  # Error
   defp _card_brand(_, _) do
     {:error}
   end
@@ -199,3 +236,4 @@ SimpleCardBrand.card_brand("545454", 16) # Diners Club International
 SimpleCardBrand.card_brand("676771", 16) # Error
 SimpleCardBrand.card_brand("67593", 12) # Maestro UK
 SimpleCardBrand.card_brand("676770", 14) # Maestro UK
+SimpleCardBrand.card_brand("67613", 12) # Maestro UK
