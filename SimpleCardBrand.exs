@@ -21,15 +21,23 @@ defmodule SimpleCardBrand do
 
   Supports:
   - American Express (:americanexpress)
+  - BORICA (:borica)
   - China T-Union (:chinatunion)
   - China UnionPay (:chinaunionpay)
   - Diners Club (:dinersclub)
   - Diners Club International (:dinersclubinternational)
   - Discover (:discover)
+  - Humo (:humo)
+  - InstaPayment (:instapayment)
+  - InterPayment (:interpayment)
   - JCB: (:jcb)
   - Maestro (:maestro)
   - Maestro UK (:maestrouk)
   - Mastercard (:mastercard)
+  - Mir (:mir)
+  - Napas (:napas)
+  - UATP (:uatp)
+  - UzCard (:uzcard)
   - Visa (:visa)
   - Visa Electron (:visaelectron)
 
@@ -85,6 +93,16 @@ defmodule SimpleCardBrand do
   # 54 is in the Mastercard range. Branded as Diners in US and Canada
   defp _card_brand([ "5", "4" | _ ], 16) do
     {:ok, :dinersclub}
+  end
+
+  # BORICA
+  defp _card_brand(["2", "2", "0", "5" | _], 16)  do
+    {:ok, :borica}
+  end
+
+  # Mir
+  defp _card_brand(["2", "2", "0", fourth | _], pan_length) when fourth in ["1", "2", "3", "4"] and pan_range(pan_length, 16, 19) do
+    {:ok, :mir}
   end
 
   # Mastercard
@@ -211,6 +229,36 @@ defmodule SimpleCardBrand do
     {:ok, :maestrouk}
   end
 
+  # UATP
+  defp _card_brand(["1" | _], 15)  do
+    {:ok, :uatp}
+  end
+
+  # InstaPayment
+  defp _card_brand(["6", "3", third | _], pan_length) when third in ["7", "8", "9"] and pan_range(pan_length, 16, 19) do
+    {:ok, :instapayment}
+  end
+
+  # InterPayment
+  defp _card_brand(["6", "3", "6" | _], pan_length) when pan_range(pan_length, 16, 19) do
+    {:ok, :interpayment}
+  end
+
+  # UzCard
+  defp _card_brand(["8", "6", "0", "0" | _], 16)  do
+    {:ok, :uzcard}
+  end
+
+  # Napas
+  defp _card_brand(["9", "7", "0", "4" | _], 16)  do
+    {:ok, :napas}
+  end
+
+  # Humo
+  defp _card_brand(["9", "8", "6", "0" | _], 16)  do
+    {:ok, :humo}
+  end
+
   # Error
   defp _card_brand(_, _) do
     {:error}
@@ -237,3 +285,11 @@ SimpleCardBrand.card_brand("676771", 16) # Error
 SimpleCardBrand.card_brand("67593", 12) # Maestro UK
 SimpleCardBrand.card_brand("676770", 14) # Maestro UK
 SimpleCardBrand.card_brand("67613", 12) # Maestro UK
+SimpleCardBrand.card_brand("97041", 16) # Napas
+SimpleCardBrand.card_brand("98603", 16) # Humo
+SimpleCardBrand.card_brand("86001", 16) # UzCard
+SimpleCardBrand.card_brand("111111111111111") # UATP
+SimpleCardBrand.card_brand("2205", 16) # Borica
+SimpleCardBrand.card_brand("637", 16) # InstaPayment
+SimpleCardBrand.card_brand("636", 18) # InterPayment
+SimpleCardBrand.card_brand("2201", 16) # Mir
