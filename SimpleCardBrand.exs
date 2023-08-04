@@ -24,6 +24,7 @@ defmodule SimpleCardBrand do
   - China T-Union (:chinatunion)
   - China UnionPay (:chinaunionpay)
   - Discover (:discover)
+  - JCB: (:jcb)
   - Mastercard (:mastercard)
   - Visa (:visa)
   - Visa Electron (:visaelectron)
@@ -58,6 +59,17 @@ defmodule SimpleCardBrand do
   # American Express
   defp _card_brand([ "3", second | _ ], 15) when second in ["4", "7"] do
     {:ok, :americanexpress}
+  end
+
+  # JCB
+  defp _card_brand(["3", "5"  | pan], pan_length) when pan_length in [13, 16, 19] do
+    sub_pan = Enum.slice(pan, 0, 2)
+      |> Enum.join()
+
+    cond do
+      "28" <= sub_pan and sub_pan <= "89"-> {:ok, :jcb}
+      true -> {:error}
+    end
   end
 
   # Mastercard
@@ -156,3 +168,5 @@ SimpleCardBrand.card_brand("4111111111111111")  # Visa
 SimpleCardBrand.card_brand("622345", 17)  # China UnionPay
 SimpleCardBrand.card_brand("31456", 19)  # China T-Union
 SimpleCardBrand.card_brand("4175003", 16) # Visa Electron
+SimpleCardBrand.card_brand("3527", 19) # Error
+SimpleCardBrand.card_brand("3528345", 19) # JCB
