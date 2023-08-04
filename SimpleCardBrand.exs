@@ -21,9 +21,12 @@ defmodule SimpleCardBrand do
 
   Supports:
   - American Express (:americanexpress)
+  - China T-Union (:chinatunion)
+  - China UnionPay (:chinaunionpay)
   - Discover (:discover)
   - Mastercard (:mastercard)
   - Visa (:visa)
+  - Visa Electron (:visaelectron)
 
   Rules as per: https://en.wikipedia.org/wiki/Payment_card_number
 
@@ -72,6 +75,31 @@ defmodule SimpleCardBrand do
   # Mastercard
   defp _card_brand([ "5", second | _ ], 16) when second in ["1", "2", "3", "4", "5"] do
     {:ok, :mastercard}
+  end
+
+  # Visa Electron
+  defp _card_brand(["4", "0", "2", "6" | _], 16) do
+    {:ok, :visaelectron}
+  end
+
+  # Visa Electron
+  defp _card_brand(["4", "1", "7", "5", "0", "0" | _], 16) do
+    {:ok, :visaelectron}
+  end
+
+  # Visa Electron
+  defp _card_brand(["4", "5", "0", "8" | _], 16) do
+    {:ok, :visaelectron}
+  end
+
+  # Visa Electron
+  defp _card_brand(["4", "8", "4", "4" | _], 16) do
+    {:ok, :visaelectron}
+  end
+
+  # Visa Electron
+  defp _card_brand(["4", "9", "1", fourth | _], 16) when fourth in ["3", "7"] do
+    {:ok, :visaelectron}
   end
 
   # Visa
@@ -127,3 +155,4 @@ SimpleCardBrand.card_brand("622126", 17) # Discover
 SimpleCardBrand.card_brand("4111111111111111")  # Visa
 SimpleCardBrand.card_brand("622345", 17)  # China UnionPay
 SimpleCardBrand.card_brand("31456", 19)  # China T-Union
+SimpleCardBrand.card_brand("4175003", 16) # Visa Electron
