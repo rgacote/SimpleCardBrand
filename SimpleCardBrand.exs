@@ -9,7 +9,7 @@ defmodule SimpleCardBrand.Guards do
   Returns true
 
   """
-  defguard pan_range(minimum, maximum, pan_length) when pan_length in minimum..maximum
+  defguard pan_range(pan_length, minimum, maximum) when pan_length in minimum..maximum
 
 end
 
@@ -75,17 +75,17 @@ defmodule SimpleCardBrand do
   end
 
   # Discover
-  defp  _card_brand(["6", "0", "1", "1" | _], pan_length) when pan_range(16, 19, pan_length) do
+  defp  _card_brand(["6", "0", "1", "1" | _], pan_length) when pan_range(pan_length, 16, 19) do
     {:ok, :discover}
   end
 
   # Discover
-  defp _card_brand(["6", "4", third | _], pan_length) when third in ["4", "5", "6", "7", "8", "9"] and pan_range(16, 19, pan_length) do
+  defp _card_brand(["6", "4", third | _], pan_length) when third in ["4", "5", "6", "7", "8", "9"] and pan_range(pan_length, 16, 19) do
     {:ok, :discover}
   end
 
   # Discover
-  defp _card_brand(["6", "2", "2" | tail], pan_length) when pan_range(16, 19, pan_length) do
+  defp _card_brand(["6", "2", "2" | tail], pan_length) when pan_range(pan_length, 16, 19) do
     sub_pan = Enum.slice(tail, 0, 3)
       |> Enum.join()
 
@@ -96,7 +96,7 @@ defmodule SimpleCardBrand do
   end
 
   # Discover
-  defp _card_brand(["6", "5" | _], pan_length) when pan_range(16, 19, pan_length) do
+  defp _card_brand(["6", "5" | _], pan_length) when pan_range(pan_length, 16, 19) do
     {:ok, :discover}
   end
 
