@@ -36,8 +36,8 @@ defmodule SimpleCardBrand do
   - Mastercard (:mastercard)
   - Mir (:mir)
   - Napas (:napas)
-  - UATP (:uatp)
   - UzCard (:uzcard)
+  - UATP (:uatp)
   - Visa (:visa)
   - Visa Electron (:visaelectron)
 
@@ -50,7 +50,7 @@ defmodule SimpleCardBrand do
   @doc """
   Identify the card brand from the PAN (Payment card Account Number).
   """
-  def card_brand(pan) do
+  def card_brand(pan) when is_binary(pan) do
     pan_head = String.slice(pan, 0, 6)
       |> String.codepoints()
     _card_brand(pan_head, String.length(pan))
@@ -59,8 +59,8 @@ defmodule SimpleCardBrand do
   @doc """
   Identify the card brand from the first six (6) digits of the PAN and the length.
   """
-  def card_brand(pan_head, pan_length) do
-    _card_brand(String.codepoints(pan_head), pan_length)
+  def card_brand(pan, pan_length) when is_binary(pan) and is_integer(pan_length) do
+    _card_brand(String.codepoints(pan), pan_length)
   end
 
   # China T-Union
