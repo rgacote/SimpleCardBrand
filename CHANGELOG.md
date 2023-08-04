@@ -6,6 +6,7 @@ Not yet ready for use.
 
 ## v0.0.4 - [UNRELEASED] WIP
 - Add guards to `card_brand`.
+- Rough move to mix project, tests are functional.
 
 ## v0.0.3 - 2023-08-04 WIP
 - Make `pan_length` first parameter of `pan_range`.
