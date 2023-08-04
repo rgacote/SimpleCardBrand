@@ -23,6 +23,8 @@ defmodule SimpleCardBrand do
   - American Express (:americanexpress)
   - China T-Union (:chinatunion)
   - China UnionPay (:chinaunionpay)
+  - Diners Club (:dinersclub)
+  - Diners Club International (:dinersclubinternational)
   - Discover (:discover)
   - JCB: (:jcb)
   - Mastercard (:mastercard)
@@ -72,6 +74,17 @@ defmodule SimpleCardBrand do
     end
   end
 
+  # Diners Club International
+  defp _card_brand([ "3", "6" | _ ], pan_length) when pan_range(pan_length, 14, 19) do
+    {:ok, :dinersclubinternational}
+  end
+
+  # Diners Club International
+  # 54 is in the Mastercard range. Branded as Diners in US and Canada
+  defp _card_brand([ "5", "4" | _ ], 16) do
+    {:ok, :dinersclub}
+  end
+
   # Mastercard
   defp _card_brand([ "2" | pan ], 16) do
     sub_pan = Enum.slice(pan, 0, 3)
@@ -85,7 +98,8 @@ defmodule SimpleCardBrand do
   end
 
   # Mastercard
-  defp _card_brand([ "5", second | _ ], 16) when second in ["1", "2", "3", "4", "5"] do
+  # 54 cards are branded as Diners in US and Canada.
+  defp _card_brand([ "5", second | _ ], 16) when second in ["1", "2", "3", "5"] do
     {:ok, :mastercard}
   end
 
@@ -170,3 +184,5 @@ SimpleCardBrand.card_brand("31456", 19)  # China T-Union
 SimpleCardBrand.card_brand("4175003", 16) # Visa Electron
 SimpleCardBrand.card_brand("3527", 19) # Error
 SimpleCardBrand.card_brand("3528345", 19) # JCB
+SimpleCardBrand.card_brand("36312", 14) # Diners Club International
+SimpleCardBrand.card_brand("545454", 16) # Diners Club International
