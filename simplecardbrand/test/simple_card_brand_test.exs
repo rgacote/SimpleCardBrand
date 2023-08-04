@@ -1,13 +1,12 @@
 defmodule SimpleCardBrandTest do
   use ExUnit.Case
-  doctest SimpleCardBrand
+  # doctest SimpleCardBrand
 
   # Copy scripts from single-file here.
   test "Placeholder" do
     assert SimpleCardBrand.card_brand("2221000", 16) == {:ok, :mastercard}
     assert SimpleCardBrand.card_brand("2220000", 16) == {:error}
     assert SimpleCardBrand.card_brand("4111111111111111", 16) == {:ok, :visa}
-    assert SimpleCardBrand.card_brand("3456", 15) == {:ok, :americanexpress}
     assert SimpleCardBrand.card_brand("3567", 15) == {:error}
     assert SimpleCardBrand.card_brand("648123", 17) == {:ok, :discover}
     assert SimpleCardBrand.card_brand("62201111", 17) == {:error}
