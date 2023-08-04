@@ -133,12 +133,6 @@ defmodule SimpleCardBrand do
     {:ok, :visa}
   end
 
-  # China UnionPay: Before Discover 622
-  defp _card_brand(["6", "2" | _], pan_length) when pan_range(pan_length, 16, 19) do
-    {:ok, :chinaunionpay}
-  end
-
-
   # Discover
   defp  _card_brand(["6", "0", "1", "1" | _], pan_length) when pan_range(pan_length, 16, 19) do
     {:ok, :discover}
@@ -164,6 +158,12 @@ defmodule SimpleCardBrand do
   defp _card_brand(["6", "5" | _], pan_length) when pan_range(pan_length, 16, 19) do
     {:ok, :discover}
   end
+
+  # China UnionPay: After Discover 622
+  defp _card_brand(["6", "2" | _], pan_length) when pan_range(pan_length, 16, 19) do
+    {:ok, :chinaunionpay}
+  end
+
 
   defp _card_brand(_, _) do
     {:error}
