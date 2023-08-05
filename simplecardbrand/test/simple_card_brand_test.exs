@@ -1,6 +1,5 @@
 defmodule SimpleCardBrandTest do
   use ExUnit.Case
-  # doctest SimpleCardBrand
 
   # Copy scripts from single-file here.
   test "Placeholder" do
