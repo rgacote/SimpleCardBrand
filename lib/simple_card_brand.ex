@@ -36,6 +36,7 @@ defmodule SimpleCardBrand do
   - Mastercard (:mastercard)
   - Mir (:mir)
   - Napas (:napas)
+  - Troy (:troy)
   - UATP (:uatp)
   - UzCard (:uzcard)
   - Visa (:visa)
@@ -271,6 +272,11 @@ defmodule SimpleCardBrand do
   # Napas
   defp _card_brand(["9", "7", "0", "4" | _], 16) do
     {:ok, :napas}
+  end
+
+  # Napas
+  defp _card_brand(["9", "7", "9", "2" | _], 16) do
+    {:ok, :troy}
   end
 
   # Humo
