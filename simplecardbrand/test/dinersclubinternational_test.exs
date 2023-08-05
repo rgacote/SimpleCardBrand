@@ -1,6 +1,6 @@
 defmodule SimpleCardBrandDinersClubInternational do
   @moduledoc """
-  Diners Club International specific tasks.
+  Diners Club International tests.
   """
   use ExUnit.Case
 

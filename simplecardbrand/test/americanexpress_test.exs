@@ -1,6 +1,6 @@
 defmodule SimpleCardBrandAmericanExpressTest do
   @moduledoc """
-  American Express specific tasks.
+  American Express tests.
   """
   use ExUnit.Case
 

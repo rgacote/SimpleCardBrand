@@ -80,7 +80,7 @@ defmodule SimpleCardBrand do
   end
 
   # JCB
-  defp _card_brand(["3", "5" | pan], pan_length) when pan_length in [13, 16, 19] do
+  defp _card_brand(["3", "5" | pan], pan_length) when pan_range(pan_length, 16, 19) do
     sub_pan =
       Enum.slice(pan, 0, 2)
       |> Enum.join()

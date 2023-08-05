@@ -1,6 +1,6 @@
 defmodule SimpleCardBrandDocsTest do
   @moduledoc """
-  Run documentation tests.
+  Documentation tests.
 
   """
   use ExUnit.Case

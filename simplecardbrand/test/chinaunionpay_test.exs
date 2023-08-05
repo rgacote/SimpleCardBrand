@@ -1,6 +1,6 @@
 defmodule SimpleCardBrandChinaUnionPay do
   @moduledoc """
-  China UnionPay specific tasks.
+  China UnionPay tests.
   """
   use ExUnit.Case
 
