@@ -34,8 +34,8 @@ defmodule SimpleCardBrand do
   - Mastercard (:mastercard)
   - Mir (:mir)
   - Napas (:napas)
-  - UzCard (:uzcard)
   - UATP (:uatp)
+  - UzCard (:uzcard)
   - Visa (:visa)
   - Visa Electron (:visaelectron)
 
@@ -109,7 +109,7 @@ defmodule SimpleCardBrand do
 
   # Mir
   defp _card_brand(["2", "2", "0", fourth | _], pan_length)
-       when fourth in ["1", "2", "3", "4"] and pan_range(pan_length, 16, 19) do
+       when fourth in ["0", "1", "2", "3", "4"] and pan_range(pan_length, 16, 19) do
     {:ok, :mir}
   end
 
@@ -194,6 +194,18 @@ defmodule SimpleCardBrand do
     {:ok, :chinaunionpay}
   end
 
+  # Maestro UK
+  # Conflicts with Maestro range.
+  defp _card_brand(["6", "7", "5", "9" | _], pan_length) when pan_range(pan_length, 12, 19) do
+    {:ok, :maestrouk}
+  end
+
+  # Maestro UK
+  defp _card_brand(["6", "7", "6", "7", "7", sixth | _], pan_length)
+       when sixth in ["0", "4"] and pan_range(pan_length, 12, 19) do
+    {:ok, :maestrouk}
+  end
+
   # Maestro
   defp _card_brand(["5", "0", "1", "8" | _], pan_length) when pan_range(pan_length, 12, 19) do
     {:ok, :maestro}
@@ -220,25 +232,9 @@ defmodule SimpleCardBrand do
   end
 
   # Maestro
-  defp _card_brand(["6", "7", "5", "9" | _], pan_length) when pan_range(pan_length, 12, 19) do
-    {:ok, :maestro}
-  end
-
-  # Maestro
   defp _card_brand(["6", "7", "6", fourth | _], pan_length)
        when fourth in ["1", "2", "3"] and pan_range(pan_length, 12, 19) do
     {:ok, :maestro}
-  end
-
-  # Maestro UK
-  defp _card_brand(["6", "7", "5", "9" | _], pan_length) when pan_range(pan_length, 12, 19) do
-    {:ok, :maestrouk}
-  end
-
-  # Maestro UK
-  defp _card_brand(["6", "7", "6", "7", "7", sixth | _], pan_length)
-       when sixth in ["0", "4"] and pan_range(pan_length, 12, 19) do
-    {:ok, :maestrouk}
   end
 
   # UATP
