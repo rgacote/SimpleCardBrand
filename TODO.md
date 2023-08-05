@@ -2,7 +2,6 @@
 
 ## Brands
 
-- RuPay
 - UkrCard
 - Verve
 

@@ -37,6 +37,7 @@ defmodule SimpleCardBrand do
   - Mastercard (:mastercard)
   - Mir (:mir)
   - Napas (:napas)
+  - RuPay (:rupay)
   - Troy (:troy)
   - UATP (:uatp)
   - UzCard (:uzcard)
@@ -257,6 +258,41 @@ defmodule SimpleCardBrand do
   # Dankort
   defp _card_brand(["5", "0", "1", "9" | _], 16) do
     {:ok, :dankort}
+  end
+
+  # RuPay
+  defp _card_brand(["6", "0" | _], 16) do
+    {:ok, :rupay}
+  end
+
+  # RuPay
+  defp _card_brand(["6", "5" | _], 16) do
+    {:ok, :rupay}
+  end
+
+  # RuPay
+  defp _card_brand(["8", "1" | _], 16) do
+    {:ok, :rupay}
+  end
+
+  # RuPay
+  defp _card_brand(["8", "2" | _], 16) do
+    {:ok, :rupay}
+  end
+
+  # RuPay
+  defp _card_brand(["5", "0", "8" | _], 16) do
+    {:ok, :rupay}
+  end
+
+  # RuPay
+  defp _card_brand(["3", "5", "3" | _], 16) do
+    {:ok, :rupay}
+  end
+
+  # RuPay
+  defp _card_brand(["3", "5", "6" | _], 16) do
+    {:ok, :rupay}
   end
 
   # InstaPayment
