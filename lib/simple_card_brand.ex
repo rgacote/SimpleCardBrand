@@ -29,6 +29,7 @@ defmodule SimpleCardBrand do
   - InstaPayment (:instapayment)
   - InterPayment (:interpayment)
   - JCB: (:jcb)
+  - LankaPay: (:lankapay)
   - Maestro (:maestro)
   - Maestro UK (:maestrouk)
   - Mastercard (:mastercard)
@@ -77,6 +78,11 @@ defmodule SimpleCardBrand do
   # American Express
   defp _card_brand(["3", second | _], 15) when second in ["4", "7"] do
     {:ok, :americanexpress}
+  end
+
+  # LankaPay
+  defp _card_brand(["3", "5","7","1","1","1"| _], 16)  do
+      {:ok, :lankapay}
   end
 
   # JCB

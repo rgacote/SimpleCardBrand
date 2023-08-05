@@ -4,7 +4,6 @@
 
 - Dankort
 - GPN
-- LankaPay
 - RuPay
 - Troy
 - UkrCard
