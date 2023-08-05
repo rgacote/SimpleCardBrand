@@ -2,7 +2,6 @@
 
 ## Brands
 
-- Dankort
 - RuPay
 - Troy
 - UkrCard

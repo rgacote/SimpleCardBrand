@@ -22,6 +22,7 @@ defmodule SimpleCardBrand do
   - BORICA (:borica)
   - China T-Union (:chinatunion)
   - China UnionPay (:chinaunionpay)
+  - Dankort (:dankort)
   - Diners Club (:dinersclub)
   - Diners Club International (:dinersclubinternational)
   - Discover (:discover)
@@ -251,6 +252,11 @@ defmodule SimpleCardBrand do
   # UATP
   defp _card_brand(["1" | _], 15) do
     {:ok, :uatp}
+  end
+
+  # Dankort
+  defp _card_brand(["5", "0", "1", "9" | _], 16) do
+    {:ok, :dankort}
   end
 
   # InstaPayment
