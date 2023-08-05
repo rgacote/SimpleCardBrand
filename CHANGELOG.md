@@ -5,7 +5,7 @@ Not yet ready for use.
 
 ## v0.1.1 - TBD WIP
 - Minor credo refactors.
-- Brands: LankaPay.
+- Brands: GPN, LankaPay.
 
 ## v0.1.0 - 2023-08-05 WIP
 - Add guards to `card_brand`.

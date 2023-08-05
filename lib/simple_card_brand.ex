@@ -25,6 +25,7 @@ defmodule SimpleCardBrand do
   - Diners Club (:dinersclub)
   - Diners Club International (:dinersclubinternational)
   - Discover (:discover)
+  - GPN (:gpn)
   - Humo (:humo)
   - InstaPayment (:instapayment)
   - InterPayment (:interpayment)
@@ -81,8 +82,8 @@ defmodule SimpleCardBrand do
   end
 
   # LankaPay
-  defp _card_brand(["3", "5","7","1","1","1"| _], 16)  do
-      {:ok, :lankapay}
+  defp _card_brand(["3", "5", "7", "1", "1", "1" | _], 16) do
+    {:ok, :lankapay}
   end
 
   # JCB
@@ -275,6 +276,11 @@ defmodule SimpleCardBrand do
   # Humo
   defp _card_brand(["9", "8", "6", "0" | _], 16) do
     {:ok, :humo}
+  end
+
+  # GPN
+  defp _card_brand([first | _], 16) when first in ["1", "2", "6", "7", "8", "9"] do
+    {:ok, :gpn}
   end
 
   # Error

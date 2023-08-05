@@ -5,6 +5,6 @@ defmodule SimpleCardBrandLankaPay do
   use ExUnit.Case
 
   test "LankaPayWikipedia" do
-      assert SimpleCardBrand.card_brand("357111", 16) == {:ok, :lankapay}
+    assert SimpleCardBrand.card_brand("357111", 16) == {:ok, :lankapay}
   end
 end
