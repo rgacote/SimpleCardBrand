@@ -3,7 +3,6 @@
 ## Brands
 
 - RuPay
-- Troy
 - UkrCard
 - Verve
 

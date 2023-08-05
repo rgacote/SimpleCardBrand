@@ -123,7 +123,7 @@ defmodule SimpleCardBrand do
     {:ok, :mir}
   end
 
-  # Mastercard
+  # Mastercard and GPN starting with 2
   defp _card_brand(["2" | pan], 16) do
     sub_pan =
       Enum.slice(pan, 0, 3)
@@ -132,7 +132,7 @@ defmodule SimpleCardBrand do
     if "221" <= sub_pan and sub_pan <= "720" do
       {:ok, :mastercard}
     else
-      {:error}
+      {:ok, :gpn}
     end
   end
 
@@ -290,8 +290,8 @@ defmodule SimpleCardBrand do
     {:ok, :humo}
   end
 
-  # GPN
-  defp _card_brand([first | _], 16) when first in ["1", "2", "6", "7", "8", "9"] do
+  # GPN starting with 2 handled by Mastercard pattern match.
+  defp _card_brand([first | _], 16) when first in ["1", "6", "7", "8", "9"] do
     {:ok, :gpn}
   end
 

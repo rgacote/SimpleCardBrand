@@ -6,7 +6,7 @@ defmodule SimpleCardBrandGPN do
 
   test "GpnWikipedia" do
     for first <- ["1", "2", "6", "7", "8", "9"] do
-      assert SimpleCardBrand.card_brand("1", 16) == {:ok, :gpn}
+      assert SimpleCardBrand.card_brand("2", 16) == {:ok, :gpn}
     end
   end
 end
