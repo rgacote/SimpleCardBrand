@@ -85,9 +85,10 @@ defmodule SimpleCardBrand do
       Enum.slice(pan, 0, 2)
       |> Enum.join()
 
-    cond do
-      "28" <= sub_pan and sub_pan <= "89" -> {:ok, :jcb}
-      true -> {:error}
+    if "28" <= sub_pan and sub_pan <= "89" do
+      {:ok, :jcb}
+    else
+      {:error}
     end
   end
 
@@ -119,9 +120,10 @@ defmodule SimpleCardBrand do
       Enum.slice(pan, 0, 3)
       |> Enum.join()
 
-    cond do
-      "221" <= sub_pan and sub_pan <= "720" -> {:ok, :mastercard}
-      true -> {:error}
+    if "221" <= sub_pan and sub_pan <= "720" do
+      {:ok, :mastercard}
+    else
+      {:error}
     end
   end
 
@@ -178,9 +180,10 @@ defmodule SimpleCardBrand do
       Enum.slice(tail, 0, 3)
       |> Enum.join()
 
-    cond do
-      "126" <= sub_pan and sub_pan <= "925" -> {:ok, :discover}
-      true -> {:error}
+    if "126" <= sub_pan and sub_pan <= "925" do
+      {:ok, :discover}
+    else
+      {:error}
     end
   end
 

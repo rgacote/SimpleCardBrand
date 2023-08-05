@@ -1,8 +1,10 @@
 # CHANGELOG
 
 A Work in Progress (WIP).
-No tests.
 Not yet ready for use.
+
+## v0.1.1 - TBD WIP
+- Minor credo refactors.
 
 ## v0.1.0 - 2023-08-05 WIP
 - Add guards to `card_brand`.
