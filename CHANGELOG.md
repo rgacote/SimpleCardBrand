@@ -4,7 +4,7 @@ A Work in Progress (WIP).
 No tests.
 Not yet ready for use.
 
-## v0.0.4 - [UNRELEASED] WIP
+## v0.1.0 - [UNRELEASED] WIP
 - Add guards to `card_brand`.
 - Rough move to mix project, tests are functional.
 
