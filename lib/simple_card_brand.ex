@@ -2,7 +2,7 @@ defmodule SimpleCardBrand.Guards do
   @moduledoc """
   Guard macros.
   """
-  @moduledoc since: "0.1.0"
+  @moduledoc since: "0.1.1"
 
   @doc """
   Check the PAN length is in the minimum to maximum allowed length (inclusive).
@@ -89,13 +89,14 @@ defmodule SimpleCardBrand do
   Rules as per: https://en.wikipedia.org/wiki/Payment_card_number
 
   """
+  @moduledoc since: "0.1.1"
 
   import SimpleCardBrand.Guards
 
   @minimum_pan_length 12
   @maximum_pan_length 19
 
-  @spec card_brand(binary) :: {:error} | {:error, <<_::64, _::_*8>>} | {:ok, atom}
+  @spec card_brand(binary) :: {:error, binary} | {:ok, atom}
   @doc ~S"""
   Identify the card brand from the `pan`.
 
@@ -119,7 +120,7 @@ defmodule SimpleCardBrand do
     |> card_brand(String.length(pan))
   end
 
-  @spec card_brand(binary, integer) :: {:error} | {:error, <<_::64, _::_*8>>} | {:ok, atom}
+  @spec card_brand(binary, integer) :: {:error} | {:error, binary} | {:ok, atom}
   @doc ~S"""
   Identify the card brand from a full or partial `pan` and the actual PAN length.
 
