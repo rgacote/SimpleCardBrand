@@ -92,7 +92,10 @@ defmodule SimpleCardBrand do
 
   import SimpleCardBrand.Guards
 
-  @spec card_brand(binary) :: {:error} | {:ok, atom}
+  @minimum_pan_length 12
+  @maximum_pan_length 19
+
+  @spec card_brand(binary) :: {:error} | {:error, <<_::64, _::_*8>>} | {:ok, atom}
   @doc ~S"""
   Identify the card brand from the `pan`.
 
@@ -108,7 +111,7 @@ defmodule SimpleCardBrand do
       {:ok, :verve}
 
       iex> SimpleCardBrand.card_brand("41111111111")
-      {:error}
+      {:error, "Minimum PAN length is 12, found 11."}
 
   """
   def card_brand(pan) when is_binary(pan) do
@@ -116,7 +119,7 @@ defmodule SimpleCardBrand do
     |> card_brand(String.length(pan))
   end
 
-  @spec card_brand(binary, integer) :: {:error} | {:ok, atom}
+  @spec card_brand(binary, integer) :: {:error} | {:error, <<_::64, _::_*8>>} | {:ok, atom}
   @doc ~S"""
   Identify the card brand from a full or partial `pan` and the actual PAN length.
 
@@ -134,7 +137,7 @@ defmodule SimpleCardBrand do
       {:ok, :verve}
 
       iex> SimpleCardBrand.card_brand("4111111111111111", 10)
-      {:error}
+      {:error, "Minimum PAN length is 12, found 10."}
   """
   def card_brand(pan, pan_length)
       when is_binary(pan) and is_integer(pan_length) and pan_length in [16, 18, 19] and
@@ -149,11 +152,22 @@ defmodule SimpleCardBrand do
   end
 
   def card_brand(pan, pan_length) when is_binary(pan) and is_integer(pan_length) do
-    if pan_length < 12 or pan_length > 19 do
-      {:error}
-    end
+    cond do
+      pan_length < @minimum_pan_length ->
+        {:error,
+         "Minimum PAN length is " <>
+           Integer.to_string(@minimum_pan_length) <>
+           ", found " <> Integer.to_string(pan_length) <> "."}
 
-    _card_brand(String.codepoints(pan), pan_length)
+      pan_length > @maximum_pan_length ->
+        {:error,
+         "Maximum PAN length " <>
+           Integer.to_string(@maximum_pan_length) <>
+           ", found " <> Integer.to_string(pan_length) <> "."}
+
+      true ->
+        _card_brand(String.codepoints(pan), pan_length)
+    end
   end
 
   # China T-Union
@@ -171,6 +185,16 @@ defmodule SimpleCardBrand do
     {:ok, :lankapay}
   end
 
+  # RuPay
+  defp _card_brand(["3", "5", "3" | _], 16) do
+    {:ok, :rupay}
+  end
+
+  # RuPay
+  defp _card_brand(["3", "5", "6" | _], 16) do
+    {:ok, :rupay}
+  end
+
   # JCB
   defp _card_brand(["3", "5" | pan], pan_length) when pan_range(pan_length, 16, 19) do
     sub_pan =
@@ -180,7 +204,7 @@ defmodule SimpleCardBrand do
     if "28" <= sub_pan and sub_pan <= "89" do
       {:ok, :jcb}
     else
-      {:error}
+      {:error, "Unknown card brand."}
     end
   end
 
@@ -275,7 +299,9 @@ defmodule SimpleCardBrand do
     if "126" <= sub_pan and sub_pan <= "925" do
       {:ok, :discover}
     else
-      {:error}
+      # 62 is ChinaUnionPay
+      # Both Discover and ChinaUnionPay length can be 16 to 19.
+      {:ok, :chinaunionpay}
     end
   end
 
@@ -367,16 +393,6 @@ defmodule SimpleCardBrand do
     {:ok, :rupay}
   end
 
-  # RuPay
-  defp _card_brand(["3", "5", "3" | _], 16) do
-    {:ok, :rupay}
-  end
-
-  # RuPay
-  defp _card_brand(["3", "5", "6" | _], 16) do
-    {:ok, :rupay}
-  end
-
   # InstaPayment
   defp _card_brand(["6", "3", third | _], pan_length)
        when third in ["7", "8", "9"] and pan_range(pan_length, 16, 19) do
@@ -415,6 +431,6 @@ defmodule SimpleCardBrand do
 
   # Error
   defp _card_brand(_, _) do
-    {:error}
+    {:error, "Unknown card brand."}
   end
 end
