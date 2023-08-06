@@ -58,8 +58,8 @@ end
 
 defmodule SimpleCardBrand do
   @moduledoc """
-  Identify card brand from PAN or first six (6) digits of the PAN.
-  The PAN (or first six thereof) must contain only digits without leading or trailing spaces.
+  Identify the card brand from the PAN or the first six (6) or eight (8) digits of the PAN.
+  The PAN must contain only digits without leading or trailing spaces.
 
   Supports:
   - American Express (:americanexpress)
@@ -97,7 +97,7 @@ defmodule SimpleCardBrand do
   import SimpleCardBrand.Guards
 
   @doc ~S"""
-  Identify the card brand from the PAN (Payment card Account Number).
+  Identify the card brand from the `pan`.
 
   Check for UkrCard and Verve early.
 
@@ -109,17 +109,13 @@ defmodule SimpleCardBrand do
       iex> SimpleCardBrand.card_brand("506099", 19)
       {:ok, :verve}
 
-      iex> SimpleCardBrand.card_brand("60400100", 19)
+      iex> SimpleCardBrand.card_brand("6040010012121161819")
       {:ok, :ukrcard}
-
 
   """
   def card_brand(pan) when is_binary(pan) do
-    pan_head =
-      String.slice(pan, 0, 6)
-      |> String.codepoints()
-
-    _card_brand(pan_head, String.length(pan))
+    pan
+    |> card_brand(String.length(pan))
   end
 
   @spec card_brand(binary, integer) :: {:error} | {:ok, atom}
