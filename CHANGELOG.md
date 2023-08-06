@@ -9,6 +9,7 @@ Not yet ready for use.
 - In-line document tests.
 - Correct major error of `card_brand/1` passing CodePoints to `card_brand/2`.
 - Identify PAN starting just 65 as Discover, vs. RuPay or Troy.
+- Generating documentation
 
 ## v0.1.0 - 2023-08-05 WIP
 - Add guards to `card_brand`.

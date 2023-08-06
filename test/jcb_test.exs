@@ -4,25 +4,18 @@ defmodule SimpleCardBrandJCB do
   """
 
   use ExUnit.Case, async: true
-  use ExUnit.Parameterized
+  use ExUnitProperties
 
-  # description
-  test_with_params "JCBWikipedia",
-                   # test case
-                   fn pan, pan_length, expected ->
-                     assert SimpleCardBrand.card_brand(pan, pan_length) == {:ok, expected}
-                   end do
-    [
-      # parameters
-      {"3528", 16, :jcb},
-      {"3530", 17, :jcb},
-      {"3540", 18, :jcb},
-      {"3550", 19, :jcb},
-      # RuPay Co-brand
-      {"3560", 16, :rupay},
-      {"3570", 17, :jcb},
-      {"3580", 18, :jcb},
-      {"3589", 19, :jcb}
-    ]
+  property "JCB" do
+    check all(
+            fragment <- StreamData.integer(3528..3589),
+            pan_length <- StreamData.integer(16..19)
+          ) do
+      # Skip RuPay brand range.
+      if fragment not in 3530..3539 and fragment not in 3560..3569 do
+        assert SimpleCardBrand.card_brand(Integer.to_string(fragment), pan_length) ==
+                 {:ok, :jcb}
+      end
+    end
   end
 end
