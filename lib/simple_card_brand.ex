@@ -10,6 +10,25 @@ defmodule SimpleCardBrand.Guards do
 
   """
   defguard pan_range(pan_length, minimum, maximum) when pan_length in minimum..maximum
+
+  @doc """
+  Determine if pan meets Verve specification.
+
+   Use in public function guard so pan is a string.
+   Additional guard on function already determined this is bytes
+
+  - 506099–506198
+  - 507865-507964
+  - 650002–650027
+
+  """
+  defguard is_verve(pan)
+           when (binary_part(pan, 0, 6) >= "506099" and binary_part(pan, 0, 6) <= "506198") or
+                  (binary_part(pan, 0, 6) >= "507865" and binary_part(pan, 0, 6) <= "507964") or
+                  (binary_part(pan, 0, 6) >= "650002" and binary_part(pan, 0, 6) <= "650027")
+
+  defguard is_ukrcard(pan)
+           when binary_part(pan, 0, 8) >= "60400100" and binary_part(pan, 0, 8) <= "60420099"
 end
 
 defmodule SimpleCardBrand do
@@ -40,7 +59,9 @@ defmodule SimpleCardBrand do
   - RuPay (:rupay)
   - Troy (:troy)
   - UATP (:uatp)
+  - UkrCard (:ukrcard)
   - UzCard (:uzcard)
+  - Verve (:verve)
   - Visa (:visa)
   - Visa Electron (:visaelectron)
 
@@ -65,6 +86,27 @@ defmodule SimpleCardBrand do
       |> String.codepoints()
 
     _card_brand(pan_head, String.length(pan))
+  end
+
+  @doc ~S"""
+  Check for Verve early.
+
+  TBD: Example and reasoning.
+
+  """
+  def card_brand(pan, pan_length)
+      when is_binary(pan) and is_integer(pan_length) and pan_length in [16, 18, 19] and
+             is_verve(pan) do
+    {:ok, :verve}
+  end
+
+  @doc ~S"""
+  Check for UkrCard early.
+  """
+  def card_brand(pan, pan_length)
+      when is_binary(pan) and is_integer(pan_length) and pan_length in [16, 18, 19] and
+             is_ukrcard(pan) do
+    {:ok, :ukrcard}
   end
 
   @doc ~S"""

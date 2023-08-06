@@ -3,7 +3,6 @@
 ## Brands
 
 - UkrCard
-- Verve
 
 ## General
 
