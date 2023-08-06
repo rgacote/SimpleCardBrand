@@ -2,33 +2,58 @@ defmodule SimpleCardBrand.Guards do
   @moduledoc """
   Guard macros.
   """
+  @moduledoc since: "0.1.0"
 
   @doc """
-  True if the PAN length is in the minimum to maximum allowed length (inclusive).
+  Check the PAN length is in the minimum to maximum allowed length (inclusive).
+  Use in guards where `pan_length` is known to be an integer.
 
-  Returns true
+  ## Examples
+
+      iex> SimpleCardBrand.Guards.pan_range(16, 12, 19)
+      true
+
+      iex> SimpleCardBrand.Guards.pan_range(16, 19, 19)
+      false
 
   """
   defguard pan_range(pan_length, minimum, maximum) when pan_length in minimum..maximum
 
   @doc """
-  Determine if pan meets Verve specification.
+  Compare the first eight (8) digits of the `pan` against the UkrCard range.
+  Use in guards where `pan` is known to be bytes.
 
-   Use in public function guard so pan is a string.
-   Additional guard on function already determined this is bytes
+  ## Examples
 
-  - 506099–506198
-  - 507865-507964
-  - 650002–650027
+      iex> SimpleCardBrand.Guards.is_ukrcard("60420099123212")
+      true
 
+      iex> SimpleCardBrand.Guards.is_ukrcard("6042010022222")
+      false
+  """
+  defguard is_ukrcard(pan)
+           when binary_part(pan, 0, 8) >= "60400100" and binary_part(pan, 0, 8) <= "60420099"
+
+  @spec is_verve(any) ::
+          {:__block__ | {:., [], [:erlang | :orelse, ...]}, [],
+           [{:= | {any, any, any}, [], [...]}, ...]}
+
+  @doc """
+  Compare the first six (6) digits of the `pan` against the Verve brand range.
+  Use in guards where `pan` is known to be bytes.
+
+  ## Examples
+
+      iex> SimpleCardBrand.Guards.is_verve("506099212121")
+      true
+
+      iex> SimpleCardBrand.Guards.is_verve("50609123")
+      false
   """
   defguard is_verve(pan)
            when (binary_part(pan, 0, 6) >= "506099" and binary_part(pan, 0, 6) <= "506198") or
                   (binary_part(pan, 0, 6) >= "507865" and binary_part(pan, 0, 6) <= "507964") or
                   (binary_part(pan, 0, 6) >= "650002" and binary_part(pan, 0, 6) <= "650027")
-
-  defguard is_ukrcard(pan)
-           when binary_part(pan, 0, 8) >= "60400100" and binary_part(pan, 0, 8) <= "60420099"
 end
 
 defmodule SimpleCardBrand do
@@ -74,10 +99,19 @@ defmodule SimpleCardBrand do
   @doc ~S"""
   Identify the card brand from the PAN (Payment card Account Number).
 
+  Check for UkrCard and Verve early.
+
   ## Examples
 
-      iex> SimpleCardBrand.card_brand("411111", 19)
+      iex> SimpleCardBrand.card_brand("4111111111111111")
       {:ok, :visa}
+
+      iex> SimpleCardBrand.card_brand("506099", 19)
+      {:ok, :verve}
+
+      iex> SimpleCardBrand.card_brand("60400100", 19)
+      {:ok, :ukrcard}
+
 
   """
   def card_brand(pan) when is_binary(pan) do
@@ -88,6 +122,7 @@ defmodule SimpleCardBrand do
     _card_brand(pan_head, String.length(pan))
   end
 
+  @spec card_brand(binary, integer) :: {:error} | {:ok, atom}
   @doc ~S"""
   Check for Verve early.
 
@@ -100,24 +135,12 @@ defmodule SimpleCardBrand do
     {:ok, :verve}
   end
 
-  @doc ~S"""
-  Check for UkrCard early.
-  """
   def card_brand(pan, pan_length)
       when is_binary(pan) and is_integer(pan_length) and pan_length in [16, 18, 19] and
              is_ukrcard(pan) do
     {:ok, :ukrcard}
   end
 
-  @doc ~S"""
-  Identify the card brand from the first six (6) digits of the PAN and the length.
-
-  ## Examples
-
-      iex> SimpleCardBrand.card_brand("4111111111111111")
-      {:ok, :visa}
-
-  """
   def card_brand(pan, pan_length) when is_binary(pan) and is_integer(pan_length) do
     _card_brand(String.codepoints(pan), pan_length)
   end
