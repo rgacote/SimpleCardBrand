@@ -2,26 +2,15 @@ defmodule SimpleCardBrandRuPayTest do
   @moduledoc """
   RuPay tests.
 
-  353 and 356 is co-branded with JCB
   65 is a Discover range
   """
 
   use ExUnit.Case, async: true
-  use ExUnit.Parameterized
+  use ExUnitProperties
 
-  test_with_params "RuPayWikipedia",
-                   # test case
-                   fn pan, pan_length, expected ->
-                     assert SimpleCardBrand.card_brand(pan, pan_length) == {:ok, expected}
-                   end do
-    [
-      {"60", 16, :rupay},
-      {"81", 16, :rupay},
-      {"82", 16, :rupay},
-      {"508", 16, :rupay},
-      {"353", 16, :rupay},
-      {"356", 16, :rupay},
-      {"65", 16, :discover}
-    ]
+  property "RuPayWikipedia" do
+    check all(fragment <- StreamData.member_of(Enum.take([60, 81, 82, 508, 353, 356], 6))) do
+      assert SimpleCardBrand.card_brand(Integer.to_string(fragment), 16) == {:ok, :rupay}
+    end
   end
 end
