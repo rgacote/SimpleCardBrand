@@ -149,6 +149,10 @@ defmodule SimpleCardBrand do
   end
 
   def card_brand(pan, pan_length) when is_binary(pan) and is_integer(pan_length) do
+    if pan_length < 12 or pan_length > 19 do
+      {:error}
+    end
+
     _card_brand(String.codepoints(pan), pan_length)
   end
 
