@@ -6,6 +6,8 @@ Not yet ready for use.
 ## v0.1.1 - TBD WIP
 - Minor credo refactors.
 - Brands: Dankort, GPN, LankaPay, Troy, UkrCard, Verve.
+- In-line document tests.
+- Correct major error of `card_brand/1` passing CodePoints to `card_brand/2`.
 
 ## v0.1.0 - 2023-08-05 WIP
 - Add guards to `card_brand`.
