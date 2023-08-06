@@ -3,7 +3,7 @@ defmodule SimpleCardBrandJCB do
   JCB tests.
   """
 
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   use ExUnit.Parameterized
 
   # description
@@ -18,7 +18,8 @@ defmodule SimpleCardBrandJCB do
       {"3530", 17, :jcb},
       {"3540", 18, :jcb},
       {"3550", 19, :jcb},
-      # {"3560", 16, :jcb},  # RuPay Co-brand
+      # RuPay Co-brand
+      {"3560", 16, :rupay},
       {"3570", 17, :jcb},
       {"3580", 18, :jcb},
       {"3589", 19, :jcb}

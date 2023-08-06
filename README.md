@@ -10,13 +10,13 @@ Uses the rules documented on [Wikipedia](https://en.wikipedia.org/wiki/Payment_c
 
 The [Wikipedia](https://en.wikipedia.org/wiki/Payment_card_number) page has several account number range conflicts that need to be researched.
 
-- 65 is documented as Troy Discover co-branded.
-  - Recognized as Troy.
+- 65 is always recognized as Discover.
+  Overrides RuPay and Troy.
 
-- 6759 is documented for both Maestro and Maestro UK.
+- 6759 is documented as both Maestro and Maestro UK.
   - Recognized as Maestro UK.
 
-- 54 is documented as Diners Club in the US and Mastercard.
+- 54 is documented as both Diners Club in the US and Mastercard.
   - Recognized as Diners Club.
 
 ## Commands

@@ -5,15 +5,23 @@ defmodule SimpleCardBrandRuPayTest do
   353 and 356 is co-branded with JCB
   65 is a Discover range
   """
-  use ExUnit.Case
 
-  test "RuPayWikipedia" do
-    for pan <- ["60", "81", "82", "508"] do
-      assert SimpleCardBrand.card_brand(pan, 16) == {:ok, :rupay}
-    end
+  use ExUnit.Case, async: true
+  use ExUnit.Parameterized
 
-    assert SimpleCardBrand.card_brand("353", 16) == {:ok, :jcb}
-    assert SimpleCardBrand.card_brand("356", 16) == {:ok, :jcb}
-    assert SimpleCardBrand.card_brand("65", 16) == {:ok, :discover}
+  test_with_params "RuPayWikipedia",
+                   # test case
+                   fn pan, pan_length, expected ->
+                     assert SimpleCardBrand.card_brand(pan, pan_length) == {:ok, expected}
+                   end do
+    [
+      {"60", 16, :rupay},
+      {"81", 16, :rupay},
+      {"82", 16, :rupay},
+      {"508", 16, :rupay},
+      {"353", 16, :rupay},
+      {"356", 16, :rupay},
+      {"65", 16, :discover}
+    ]
   end
 end

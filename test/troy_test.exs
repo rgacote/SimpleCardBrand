@@ -2,7 +2,7 @@ defmodule SimpleCardBrandTroy do
   @moduledoc """
   Troy tests.
 
-  Ignore 65 as it is a Discover co-brand.
+  Identify 65 as Discover.
 
   """
   use ExUnit.Case
