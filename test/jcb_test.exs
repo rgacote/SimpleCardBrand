@@ -6,7 +6,7 @@ defmodule SimpleCardBrandJCB do
   use ExUnit.Case, async: true
   use ExUnitProperties
 
-  property "JCB" do
+  property "JCBWikipedia" do
     check all(
             fragment <- StreamData.integer(3528..3589),
             pan_length <- StreamData.integer(16..19)
