@@ -52,6 +52,12 @@ defmodule SimpleCardBrand do
 
   @doc ~S"""
   Identify the card brand from the PAN (Payment card Account Number).
+
+  ## Examples
+
+      iex> SimpleCardBrand.card_brand("411111", 19)
+      {:ok, :visa}
+
   """
   def card_brand(pan) when is_binary(pan) do
     pan_head =
@@ -61,7 +67,7 @@ defmodule SimpleCardBrand do
     _card_brand(pan_head, String.length(pan))
   end
 
-  @doc """
+  @doc ~S"""
   Identify the card brand from the first six (6) digits of the PAN and the length.
 
   ## Examples
