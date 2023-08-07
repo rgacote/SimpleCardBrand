@@ -24,3 +24,4 @@ repos:
     - id: mix-format
     - id: mix-test
     - id: mix-credo
+      args: ["--strict"]
