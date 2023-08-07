@@ -54,7 +54,7 @@ end
 
 defmodule SimpleCardBrand do
   @moduledoc """
-  Identify the card brand from the PAN or the first six (6) or eight (8) digits of the PAN.
+  Identify the card brand from the PAN or the first six or  eight (UkrCard) PAN digits.
   The PAN must contain only digits without leading or trailing spaces.
 
   Supports:
@@ -123,6 +123,7 @@ defmodule SimpleCardBrand do
   @spec card_brand(binary, integer) :: {:error} | {:error, binary} | {:ok, atom}
   @doc ~S"""
   Identify the card brand from a full or partial `pan` and the actual PAN length.
+  Useful when identifying brands from previously-stored PANs.
 
   Check for UkrCard and Verve early.
 
