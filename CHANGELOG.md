@@ -8,6 +8,8 @@ Not yet ready for use.
   - `{:error, {:pan_too_short,"Minimum PAN length is 12, found 10."}}`
   - `{:error, {:pan_unknown,"Unknown card brand."}}`
   - `{:error, {:pan_too_long, "Maximum PAN length is 19, found 20."}}`
+- Replace Erlang binary/bytes types with String.t in @spec's.
+- Add README and CHANGELOG to Hex docs.
 
 ## 0.2.0 - 2023-08-07 WIP
 - Minor credo refactors.

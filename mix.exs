@@ -1,13 +1,19 @@
 defmodule SimpleCardBrand.MixProject do
   use Mix.Project
 
+  @source_url "https://github.com/rgacote/SimpleCardBrand"
+  @version "0.2.0"
   def project do
     [
       app: :simplecardbrand,
-      version: "0.2.0",
+      version: @version,
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+
+      # Docs
+      name: "SimpleCardBrand",
+      docs: docs()
     ]
   end
 
@@ -28,5 +34,25 @@ defmodule SimpleCardBrand.MixProject do
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
     ]
+  end
+
+  # Examples
+  # https://github.com/elixir-ecto/ecto/blob/b275ef25349b14ee0e01da7388dea544fecc1fc2/mix.exs#L104-L122
+  defp docs do
+    [
+      main: "SimpleCardBrand",
+      source_ref: "v#{@version}",
+      source_url: @source_url,
+      extras: extras(),
+      groups_for_extras: groups_for_extras()
+    ]
+  end
+
+  defp extras() do
+    ["README.md", "CHANGELOG.md"]
+  end
+
+  defp groups_for_extras do
+    [Introduction: "README.md"]
   end
 end
