@@ -3,7 +3,7 @@
 A Work in Progress (WIP).
 Not yet ready for use.
 
-## v0.2.0 - 2023-08-07 WIP
+## 0.2.0 - 2023-08-07 WIP
 - Minor credo refactors.
 - Brands: Dankort, GPN, LankaPay, Troy, UkrCard, Verve.
   - Brands are now complete.
