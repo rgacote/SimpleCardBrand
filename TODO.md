@@ -2,6 +2,4 @@
 
 ## General
 
-- Pre-commits
-
 - Review CoBrand
