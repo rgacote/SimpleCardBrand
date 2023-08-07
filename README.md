@@ -1,13 +1,10 @@
 # Simple Card Brand
 
-## Description
-
 Determine a payment card's brand from the leading digits and length of the account number (PAN).
 
 Uses the rules documented on [Wikipedia](https://en.wikipedia.org/wiki/Payment_card_number).
 
-Supports:
-
+## Card Brands
 - American Express (:americanexpress)
 - BORICA (:borica)
 - China T-Union (:chinatunion)
@@ -49,7 +46,7 @@ The [Wikipedia](https://en.wikipedia.org/wiki/Payment_card_number) page has seve
 - 54 is documented as both Diners Club in the US and Mastercard.
   - Recognized as Diners Club.
 
-## Commands
+## Mix Commands
 
 - mix format
 - mix test
