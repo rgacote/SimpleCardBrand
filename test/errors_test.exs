@@ -5,7 +5,12 @@ defmodule SimpleCardBrandErrorsTest do
 
   use ExUnit.Case
 
-  test "ErrorsTooLong" do
+  test "PAN unknown" do
+    assert SimpleCardBrand.card_brand("000000000000") ==
+             {:error, {:pan_unknown, "Unknown card brand."}}
+  end
+
+  test "PAN too long" do
     # General
     assert SimpleCardBrand.card_brand("41111111111111111111") ==
              {:error, {:pan_too_long, "Maximum PAN length is 19, found 20."}}
@@ -19,7 +24,7 @@ defmodule SimpleCardBrandErrorsTest do
              {:error, {:pan_too_long, "Maximum PAN length is 19, found 21."}}
   end
 
-  test "ErrorsTooShort" do
+  test "PAN too short" do
     # General
     assert SimpleCardBrand.card_brand("41111111111") ==
              {:error, {:pan_too_short, "Minimum PAN length is 12, found 11."}}
