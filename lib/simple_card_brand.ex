@@ -96,7 +96,12 @@ defmodule SimpleCardBrand do
   @minimum_pan_length 12
   @maximum_pan_length 19
 
-  @spec card_brand(binary) :: {:error, binary} | {:ok, atom}
+  @spec card_brand(String.t()) ::
+          {:error,
+           {:pan_too_long, String.t()}
+           | {:pan_too_short, String.t()}
+           | {:pan_unknown, String.t()}}
+          | {:ok, atom}
   @doc ~S"""
   Identify the card brand from the `pan`.
 
@@ -112,7 +117,10 @@ defmodule SimpleCardBrand do
       {:ok, :verve}
 
       iex> SimpleCardBrand.card_brand("41111111111")
-      {:error, "Minimum PAN length is 12, found 11."}
+      {:error, {:pan_too_short, "Minimum PAN length is 12, found 11."}}
+
+      iex> SimpleCardBrand.card_brand("41111111111111111120")
+      {:error, {:pan_too_long, "Maximum PAN length is 19, found 20."}}
 
   """
   def card_brand(pan) when is_binary(pan) do
@@ -120,7 +128,12 @@ defmodule SimpleCardBrand do
     |> card_brand(String.length(pan))
   end
 
-  @spec card_brand(binary, integer) :: {:error} | {:error, binary} | {:ok, atom}
+  @spec card_brand(String.t(), integer) ::
+          {:error,
+           {:pan_too_long, String.t()}
+           | {:pan_too_short, String.t()}
+           | {:pan_unknown, String.t()}}
+          | {:ok, atom}
   @doc ~S"""
   Identify the card brand from a full or partial `pan` and the actual PAN length.
   Useful when identifying brands from previously-stored PANs.
@@ -139,7 +152,10 @@ defmodule SimpleCardBrand do
       {:ok, :verve}
 
       iex> SimpleCardBrand.card_brand("4111111111111111", 10)
-      {:error, "Minimum PAN length is 12, found 10."}
+      {:error, {:pan_too_short,"Minimum PAN length is 12, found 10."}}
+
+      iex> SimpleCardBrand.card_brand("0123456789012345678")
+      {:error, {:pan_unknown,"Unknown card brand."}}
   """
   def card_brand(pan, pan_length)
       when is_binary(pan) and is_integer(pan_length) and pan_length in [16, 18, 19] and
@@ -157,15 +173,17 @@ defmodule SimpleCardBrand do
     cond do
       pan_length < @minimum_pan_length ->
         {:error,
-         "Minimum PAN length is " <>
-           Integer.to_string(@minimum_pan_length) <>
-           ", found " <> Integer.to_string(pan_length) <> "."}
+         {:pan_too_short,
+          "Minimum PAN length is " <>
+            Integer.to_string(@minimum_pan_length) <>
+            ", found " <> Integer.to_string(pan_length) <> "."}}
 
       pan_length > @maximum_pan_length ->
         {:error,
-         "Maximum PAN length " <>
-           Integer.to_string(@maximum_pan_length) <>
-           ", found " <> Integer.to_string(pan_length) <> "."}
+         {:pan_too_long,
+          "Maximum PAN length is " <>
+            Integer.to_string(@maximum_pan_length) <>
+            ", found " <> Integer.to_string(pan_length) <> "."}}
 
       true ->
         _card_brand(String.codepoints(pan), pan_length)
@@ -206,7 +224,7 @@ defmodule SimpleCardBrand do
     if "28" <= sub_pan and sub_pan <= "89" do
       {:ok, :jcb}
     else
-      {:error, "Unknown card brand."}
+      {:error, {:pan_unknown, "Unknown card brand."}}
     end
   end
 
@@ -433,6 +451,6 @@ defmodule SimpleCardBrand do
 
   # Error
   defp _card_brand(_, _) do
-    {:error, "Unknown card brand."}
+    {:error, {:pan_unknown, "Unknown card brand."}}
   end
 end

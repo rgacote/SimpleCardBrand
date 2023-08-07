@@ -3,6 +3,12 @@
 A Work in Progress (WIP).
 Not yet ready for use.
 
+## 0.3.0 - 2023-08-TBD
+- Return reason tuple on error.
+  - `{:error, {:pan_too_short,"Minimum PAN length is 12, found 10."}}`
+  - `{:error, {:pan_unknown,"Unknown card brand."}}`
+  - `{:error, {:pan_too_long, "Maximum PAN length is 19, found 20."}}`
+
 ## 0.2.0 - 2023-08-07 WIP
 - Minor credo refactors.
 - Brands: Dankort, GPN, LankaPay, Troy, UkrCard, Verve.
