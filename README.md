@@ -5,6 +5,7 @@ Determine a payment card's brand from the leading digits and length of the accou
 Uses the rules documented on [Wikipedia](https://en.wikipedia.org/wiki/Payment_card_number).
 
 ## Card Brands
+
 - American Express (:americanexpress)
 - BORICA (:borica)
 - China T-Union (:chinatunion)
