@@ -3,7 +3,7 @@
 A Work in Progress (WIP).
 Not yet ready for use.
 
-## 0.3.0 - 2023-08-TBD
+## 0.3.0 - 2023-08-08
 
 - Return reason tuple on error.
   - `{:error, {:pan_too_short,"Minimum PAN length is 12, found 10."}}`
