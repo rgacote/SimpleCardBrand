@@ -9,6 +9,7 @@ defmodule SimpleCardBrand.MixProject do
       version: @version,
       elixir: "~> 1.14",
       # start_permanent: Mix.env() == :prod,
+      escript: [main_module: Commandline.CLI],
       deps: deps(),
 
       # Docs

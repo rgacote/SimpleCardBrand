@@ -19,9 +19,10 @@ repos:
         args: ["-d MD013,MD007,MD029", scan, ./]
 
 - repo: https://github.com/Appropriate-Solutions-Inc/elixir-pre-commit-hooks
-  rev: v1.0.1
+  rev: v1.0.2
   hooks:
     - id: mix-format
     - id: mix-test
     - id: mix-credo
       args: ["--strict"]
+    - id: mix-escript-build
