@@ -16,20 +16,40 @@ defmodule Commandline.CLI do
 
   """
 
+  # https://inquisitivedeveloper.com/learn-with-me-elixir-elixirlargesort-intgen-project-part-2-77/
+  # https://clairettran.medium.com/elixir-beginner-ii-tutorial-ab219ba6f4cd
   @doc """
   """
   def main(args) do
-    {_opts, argv, _errors} =
+    {opts, argv, _errors} =
       OptionParser.parse(args,
-        switches: [],
+        switches: [pan_length: :integer],
         aliases: []
       )
 
-    for pan <- argv do
-      case SimpleCardBrand.card_brand(pan) do
-        {:ok, brand} -> IO.puts("PAN: #{pan} -> Brand: #{brand}")
-        {:error, {_, reason}} -> IO.puts("PAN: #{pan} -> #{reason}")
-      end
+    opts
+    |> Enum.into(%{})
+    |> _brandit(argv)
+  end
+
+  defp _brandit(%{pan_length: pan_length} = flags, [pan | pans]) do
+    case SimpleCardBrand.card_brand(pan, pan_length) do
+      {:ok, brand} -> IO.puts("PAN: #{pan} -> Brand: #{brand}")
+      {:error, {_, reason}} -> IO.puts("PAN: #{pan} -> #{reason}")
     end
+
+    _brandit(flags, pans)
+  end
+
+  defp _brandit(%{}, [pan | pans]) do
+    case SimpleCardBrand.card_brand(pan) do
+      {:ok, brand} -> IO.puts("PAN: #{pan} -> Brand: #{brand}")
+      {:error, {_, reason}} -> IO.puts("PAN: #{pan} -> #{reason}")
+    end
+
+    _brandit(%{}, pans)
+  end
+
+  defp _brandit(%{}, []) do
   end
 end

@@ -1,7 +1,8 @@
 # CHANGELOG
 
-A Work in Progress (WIP).
-Not yet ready for use.
+## 0.4.0 -- 2023-08-XX
+
+- CLI for `card_brand/2`.
 
 ## 0.3.0 - 2023-08-08
 
