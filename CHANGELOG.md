@@ -3,6 +3,7 @@
 ## 0.4.0 -- 2023-08-XX
 
 - CLI for `card_brand/2`.
+- Add GitHub workflow.
 
 ## 0.3.0 - 2023-08-08
 
