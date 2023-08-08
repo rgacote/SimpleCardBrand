@@ -1,9 +1,10 @@
 # CHANGELOG
 
-## 0.4.0 -- 2023-08-XX
+## 1.0.0 -- 2023-08-08
 
 - CLI for `card_brand/2`.
 - Add GitHub workflow.
+- Publish
 
 ## 0.3.0 - 2023-08-08
 
