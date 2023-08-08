@@ -8,8 +8,10 @@ defmodule SimpleCardBrand.MixProject do
       app: :simplecardbrand,
       version: @version,
       elixir: "~> 1.14",
-      # start_permanent: Mix.env() == :prod,
+      build_embedded: Mix.env() == :prod,
       escript: [main_module: Commandline.CLI],
+      description: "Identify card brands",
+      package: package(),
       deps: deps(),
 
       # Docs
@@ -35,6 +37,15 @@ defmodule SimpleCardBrand.MixProject do
 
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+    ]
+  end
+
+  defp package do
+    [
+      files: ["lib", "mix.exs", "README*", "LICENSE*"],
+      maintainers: ["Raymond GA Côté"],
+      licenses: ["BSD-3-Clause"],
+      links: %{"GitHub" => "https://github.com/rgacote/SimpleCardBrand"}
     ]
   end
 
