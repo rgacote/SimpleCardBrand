@@ -18,6 +18,7 @@ permissions:
   contents: read
 
 jobs:
+  test:
     runs-on: ubuntu-latest
     name: Test on OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
     strategy:
@@ -26,7 +27,6 @@ jobs:
       matrix:
         otp: ['25.0.4']       # Define the OTP version [required]
         elixir: ['1.14.1']    # Define the elixir version [required]
-
     steps:
     # Step: Setup Elixir + Erlang image as the base.
     - name: Set up Elixir
