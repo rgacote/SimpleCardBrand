@@ -2,6 +2,8 @@ defmodule Commandline.CLI do
   @moduledoc """
   Command line interface for checking payment card account number brands.
 
+  Build using mix escript.build from project root.
+
   ## Examples
 
       iex> ./simplecardbrand 41111111111111111

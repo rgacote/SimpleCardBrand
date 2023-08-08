@@ -12,6 +12,7 @@ Not yet ready for use.
 - Replace Erlang binary/bytes types with String.t in @spec's.
 - Add README and CHANGELOG to Hex docs.
 - Add pre-commit tasks.
+- Add command-line interface.
 
 ## 0.2.0 - 2023-08-07 WIP
 
