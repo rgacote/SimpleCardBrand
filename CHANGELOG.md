@@ -5,6 +5,7 @@
 - CI changes:
   - Elixir 1.14.5
   - OTP 25.3.2.5
+  - Add Elixir 1.15.5
 
 ## 1.0.0 -- 2023-08-08
 
