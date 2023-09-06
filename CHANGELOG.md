@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.0.XX -- 2023-09-XX WIP
+
+- CI changes:
+  - Elixir 1.14.5
+
 ## 1.0.0 -- 2023-08-08
 
 - CLI for `card_brand/2`.
