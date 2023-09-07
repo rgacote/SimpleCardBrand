@@ -12,6 +12,7 @@
   - Credo config
   - Document dialyzer
   - InchEx
+  - ExCoveralls
 
 ## 1.0.0 -- 2023-08-08
 
