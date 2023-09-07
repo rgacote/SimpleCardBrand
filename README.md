@@ -52,6 +52,7 @@ The [Wikipedia](https://en.wikipedia.org/wiki/Payment_card_number) page has seve
 - mix format
 - mix test
 - mix credo --strict
+- mix dialyzer
 
 ## Installation
 

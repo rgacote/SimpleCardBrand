@@ -10,6 +10,7 @@
 
 - Code Quality Changes (Adopting Elixir):
   - Credo config
+  - Document dialyzer
 
 ## 1.0.0 -- 2023-08-08
 
