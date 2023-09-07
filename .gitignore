@@ -27,3 +27,5 @@ simplecardbrand-*.tar
 
 # Commandline
 simplecardbrand
+
+.tool-versions
