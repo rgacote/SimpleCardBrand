@@ -53,6 +53,10 @@ The [Wikipedia](https://en.wikipedia.org/wiki/Payment_card_number) page has seve
 - mix test
 - mix credo --strict
 - mix dialyzer
+- mix inch
+  - Documentation coverage test.
+  - Use as guidance, not pass/fail CI.
+  - Fails to note documentation on new `defguard` macro.
 
 ## Installation
 

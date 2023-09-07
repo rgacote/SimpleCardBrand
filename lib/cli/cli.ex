@@ -19,6 +19,9 @@ defmodule Commandline.CLI do
   # https://inquisitivedeveloper.com/learn-with-me-elixir-elixirlargesort-intgen-project-part-2-77/
   # https://clairettran.medium.com/elixir-beginner-ii-tutorial-ab219ba6f4cd
   @doc """
+  Entry point.
+
+  See module documentation for usage.
   """
   def main(args) do
     {opts, argv, _errors} =
