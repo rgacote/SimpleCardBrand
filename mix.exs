@@ -40,8 +40,8 @@ defmodule SimpleCardBrand.MixProject do
     [
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:stream_data, "~> 0.6", only: [:dev, :test], runtime: false},
-      {:ex_doc, "~> 0.21", only: :dev, runtime: false},
-      {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
+      {:ex_doc, "~> 0.30", only: :dev, runtime: false},
+      {:dialyxir, "~> 1.4", only: [:dev], runtime: false},
       {:inch_ex, "~>  2.1.0-rc.1", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.17.1", only: [:test], runtime: false}
 

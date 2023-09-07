@@ -58,6 +58,9 @@ The [Wikipedia](https://en.wikipedia.org/wiki/Payment_card_number) page has seve
   - Documentation coverage test.
   - Use as guidance, not pass/fail CI.
   - Fails to note documentation on new `defguard` macro.
+- mix hex.outdated
+- mix hex.audit
+- mix deps.update XXX
 
 ## Installation
 

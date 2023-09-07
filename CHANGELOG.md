@@ -14,6 +14,10 @@
   - InchEx
   - ExCoveralls
 
+- Update deps:
+  - `dialyxir`
+  - `ex_doc`
+
 ## 1.0.0 -- 2023-08-08
 
 - CLI for `card_brand/2`.
