@@ -13,8 +13,9 @@
   - Document dialyzer
   - InchEx
   - ExCoveralls
+  - Sobelow
 
-- Update deps:
+- Update dependencies:
   - `dialyxir`
   - `ex_doc`
 

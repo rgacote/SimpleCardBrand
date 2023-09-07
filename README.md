@@ -61,6 +61,8 @@ The [Wikipedia](https://en.wikipedia.org/wiki/Payment_card_number) page has seve
 - mix hex.outdated
 - mix hex.audit
 - mix deps.update XXX
+- mix sobelow --config
+  - Better suited for Phoenix apps. Included for future reference.
 
 ## Installation
 
