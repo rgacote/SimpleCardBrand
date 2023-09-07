@@ -8,6 +8,9 @@
   - Add Elixir 1.15.5
   - Add OTP 26.0.2
 
+- Code Quality Changes (Adopting Elixir):
+  - Credo config
+
 ## 1.0.0 -- 2023-08-08
 
 - CLI for `card_brand/2`.

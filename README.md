@@ -51,7 +51,7 @@ The [Wikipedia](https://en.wikipedia.org/wiki/Payment_card_number) page has seve
 
 - mix format
 - mix test
-- mix credo
+- mix credo --strict
 
 ## Installation
 
@@ -71,3 +71,9 @@ end
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at <https://hexdocs.pm/simplecardbrand>.
+
+## Adopting Elixir
+
+I'm using this project as a reference for various quality control tools.
+As a result, there's a lot of code quality tools for such a small single-file module.
+Using the [Adopting Elixir](https://www.kobo.com/us/en/ebook/adopting-elixir) recommendations.
