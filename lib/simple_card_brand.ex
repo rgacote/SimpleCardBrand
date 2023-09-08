@@ -394,11 +394,6 @@ defmodule SimpleCardBrand do
   end
 
   # RuPay
-  defp _card_brand(["6", "5" | _], 16) do
-    {:ok, :rupay}
-  end
-
-  # RuPay
   defp _card_brand(["8", "1" | _], 16) do
     {:ok, :rupay}
   end
