@@ -1,6 +1,9 @@
 defmodule SimpleCardBrand.Guards do
   @moduledoc """
   Guard macros.
+
+  NOTE: defguard is a macro so the doc tests do not run.
+
   """
   @moduledoc since: "0.1.1"
 

@@ -2,6 +2,10 @@
 
 ## 1.0.XX -- 2023-09-XX WIP
 
+### Added
+
+- Guard tests.
+
 ### Changed
 
 - Remove code that maps PAN starting with 65 to :rupay.
