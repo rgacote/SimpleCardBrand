@@ -4,7 +4,8 @@
 
 ### Added
 
-- Guard tests.
+- Test guards.
+- Test CLI module.
 
 ### Changed
 

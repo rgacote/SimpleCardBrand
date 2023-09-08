@@ -7,13 +7,15 @@ defmodule Commandline.CLI do
   ## Examples
 
       iex> ./simplecardbrand 41111111111111111
-      {:ok, :visa}
+      PAN: 41111111111111111 -> Unknown card brand.
 
-      iex> ./simplecardbrand 41111111111111111 7111111111111111 8331111111111111111
-      {:ok, :visa}
-      {:ok, :gpn}
-      {:error, {:pan_unknown, "Unknown card brand."}}
+      iex> ./simplecardbrand 4111111111111111 7111111111111111 8331111111111111111
+      PAN: 4111111111111111 -> Unknown card brand.
+      PAN: 7111111111111111 -> Brand: gpn
+      PAN: 8331111111111111111 -> Unknown card brand.
 
+      iex> ./simplecardbrand 4111111 --pan-length=16
+      PAN: 4111111 -> Brand: visa
   """
 
   # https://inquisitivedeveloper.com/learn-with-me-elixir-elixirlargesort-intgen-project-part-2-77/
